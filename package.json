@@ -1,0 +1,23 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot created with JavaScript and Node.js following guides from https://discordjs.guide/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raked/discord-bot.git"
+  },
+  "author": "Daniel Fell Jr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raked/discord-bot/issues"
+  },
+  "homepage": "https://github.com/raked/discord-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0"
+  }
+}
