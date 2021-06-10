@@ -16,13 +16,23 @@ client.once("ready", () => {
 
 //when a message is detected, log it to the console.
 client.on("message", (message) => {
-  if (message.content.startsWith(`${prefix}ping`)) {
-    // send back "Pong." to the channel the message was sent in
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).trim().split(" ");
+  const command = args.shift().toLowerCase();
+
+  if (command === "ping") {
     message.channel.send("Pong.");
-  } else if (message.content.startsWith(`${prefix}beep`)) {
-    message.channel.send("Boop.");
-  } else if (message.content.startsWith(`${prefix}server`)) {
-    message.channel.send(`This server's name is: ${message.guild.name}`);
+  } else if (command === "args-info") {
+    if (!args.length) {
+      return message.channel.send(
+        `You didn't provide any arguments, ${message.author}!`
+      );
+    } else if (args[0] === "foo") {
+      return message.channel.send("bar");
+    }
+
+    message.channel.send(`First argument: ${args[0]}`);
   }
 });
 
