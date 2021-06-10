@@ -14,7 +14,10 @@ client.once("ready", () => {
 
 //when a message is detected, log it to the console.
 client.on("message", (message) => {
-  console.log(message.content);
+  if (message.content === "!ping") {
+    // send back "Pong." to the channel the message was sent in
+    message.channel.send("Pong.");
+  }
 });
 
 // login to Discord with your app's token
