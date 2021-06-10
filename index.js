@@ -23,15 +23,20 @@ client.on("message", (message) => {
 
   if (command === "ping") {
     message.channel.send("Pong.");
-  } else if (command === "kick") {
-    // Grab the "first" mentioned user from the message
-    // This will return a `User` object, just like `message.author`
-    if (!message.mentions.users.size) {
-      return message.reply("you need to tag a user in order to kick them!");
-    }
-    const taggedUser = message.mentions.users.first();
+  } else if (command === "prune") {
+    const amount = parseInt(args[0]) + 1;
 
-    message.channel.send(`You wanted to kick: ${taggedUser.username}`);
+    if (isNaN(amount)) {
+      return message.reply("that doesn't seem to be a valid number.");
+    } else if (amount < 2 || amount > 100) {
+      return message.reply("you need to input a number between 2 and 100.");
+    }
+    message.channel.bulkDelete(amount, true).catch((err) => {
+      console.error(err);
+      message.channel.send(
+        "there was an error trying to prune messages in this channel!"
+      );
+    });
   }
 });
 
