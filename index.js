@@ -23,16 +23,15 @@ client.on("message", (message) => {
 
   if (command === "ping") {
     message.channel.send("Pong.");
-  } else if (command === "args-info") {
-    if (!args.length) {
-      return message.channel.send(
-        `You didn't provide any arguments, ${message.author}!`
-      );
-    } else if (args[0] === "foo") {
-      return message.channel.send("bar");
+  } else if (command === "kick") {
+    // Grab the "first" mentioned user from the message
+    // This will return a `User` object, just like `message.author`
+    if (!message.mentions.users.size) {
+      return message.reply("you need to tag a user in order to kick them!");
     }
+    const taggedUser = message.mentions.users.first();
 
-    message.channel.send(`First argument: ${args[0]}`);
+    message.channel.send(`You wanted to kick: ${taggedUser.username}`);
   }
 });
 
